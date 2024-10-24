@@ -1,0 +1,17 @@
+{
+    "name": "mirjan24/op-task",
+    "autoload": {
+        "psr-4": {
+            "Mirjan24\\OpTask\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Webmaster",
+            "email": "webmaster@mirjan24.com"
+        }
+    ],
+    "require": {
+        "smarty/smarty": "^5.4"
+    }
+}
