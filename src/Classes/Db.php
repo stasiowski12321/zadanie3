@@ -14,7 +14,7 @@ class Db {
     private $conn;
     private static $instance = null;
 
-    private function __construct()
+    private function __construct()  
     {
         $dsn = "mysql:host={$this->host};dbname={$this->databaseName}";
 
@@ -46,6 +46,27 @@ class Db {
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function create($table, $attributes = [])
+    {
+
+        $columns = [];
+        $values = []; 
+    
+        foreach ($attributes as $key => $value) {
+            $columns[] = sprintf("`%s`", $key); 
+            $values[] = sprintf("'%s'", $value);
+        }
+    
+        $columnsList = implode(', ', $columns);
+        $valuesList = implode(', ', $values);
+    
+        $query = sprintf("INSERT INTO `%s` (%s) VALUES (%s)", $table, $columnsList, $valuesList);
+    
+        return $this->getConnection()->query($query);
+        
+    }
+    
+
     public function update($table, $key, $attributes)
     {
         $assignments = [];
@@ -55,13 +76,14 @@ class Db {
         }
     
         $setClause = implode(', ', $assignments);
+
         $query = sprintf("UPDATE `%s` SET %s WHERE `id` = %d", $table, $setClause, (int) $key);
     
         return $this->getConnection()->query($query);
     }
 
     public function delete($tablename, $key){
-        $sql = "DELETE FROM " . $tablename . " WHERE id = " . (int) $key;
+        $sql = sprintf("DELETE FROM `%s` WHERE `id` = %d", $tablename, (int) $key);
        
        return $this->getConnection()->query($sql);
     }

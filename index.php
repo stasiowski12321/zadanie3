@@ -37,23 +37,27 @@ switch ($metoda) {
     case 'loadCreateForm':
         echo $smarty->display('users/create.tpl');
         break;
-    case 'createUser':
-        $firstname = Tools::getValue('firstname');
-        $lastname = Tools::getValue('lastname');
-        $email = Tools::getValue('email');
-        $password = Tools::getValue('password');
+        case 'createUser':
+            $firstname = Tools::getValue('firstname');
+            $lastname = Tools::getValue('lastname');
+            $email = Tools::getValue('email');
+            $password = Tools::getValue('password');
 
-        $res = User::create([
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'email' => $email,
-            'password' => $password
-        ]);
+            $user = new User();
 
-        if ($res) {
-            echo "Dodano użytkownika";
-        }
-        break;
+            $user->firstname = $firstname;
+            $user->lastname = $lastname;
+            $user->email = $email;
+            $user->password = $password;
+
+            $test = $user->create();
+
+            if ($test) {
+                echo "Dodano użytkownika";
+            } else {
+                echo "Błąd podczas dodawania użytkownika";
+            }
+            break;
     case 'update':
             $userId = Tools::getValue('userID');
             $user = User::find(id: $userId);

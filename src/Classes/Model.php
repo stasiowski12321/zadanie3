@@ -37,25 +37,11 @@ class Model
         return false; 
     }
     
-    public static function create($data = [])
+    public function create()
     {
-        $fields = array_keys($data);
-        $values = array_values($data);
-    
-        $fieldsFormatted = array_map(function($field) {
-            return $field;
-        }, $fields);
-    
-        $valuesFormatted = array_map(function($value) {
-            return "'" . addslashes($value) . "'";
-        }, $values);
-    
-        $fieldsString = implode(",", $fieldsFormatted);
-        $valuesString = implode(",", $valuesFormatted);
-
-        $sql = "INSERT INTO `" . static::$tableName . "` ($fieldsString) VALUES ($valuesString)";
-    
-        return Db::getInstance()->execute($sql);
+        $values = $this->__serialize();
+        
+        return Db::getInstance()->create(static::$tableName, $values);
     }
     
 

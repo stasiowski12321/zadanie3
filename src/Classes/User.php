@@ -2,6 +2,8 @@
 
 namespace Mirjan24\OpTask\Classes;
 
+use function PHPSTORM_META\elementType;
+
 class User extends Model
 {
     public static $tableName = "users";
@@ -17,31 +19,6 @@ class User extends Model
         'email',
         'password'
     ];
-
-    public static function create($data = [])
-    {
-        if (static::getEmail($data['email'])) return false;
-
-        $db = Db::getInstance();
-        $res = $db->getConnection()->prepare("INSERT INTO " . static::$tableName . " (firstname, lastname, email, password) VALUES (:firstname, :lastname, :email, :password)");
-
-
-        $res->bindParam(':firstname', $data['firstname']);
-        $res->bindParam(':lastname', $data['lastname']);
-        $res->bindParam(':email', $data['email']);
-        $res->bindParam(':password', $data['password']);
-        
-        return $res->execute();
-    }
-
-    public static function getAllUsers()
-    {
-        $db = Db::getInstance();
-        $res = $db->getConnection()->prepare("SELECT * FROM " . static::$tableName);
-        $res->execute();
-        return $res->fetchAll();
-    }
-
     public static function getEmail($email)
     {
         $db = Db::getInstance();
@@ -51,5 +28,29 @@ class User extends Model
         
         return (bool) $res->fetchColumn();
     }
+
+    public function checkEmail($email)
+    {
+         return self::getEmail($email);
+    }
+    
+    public function create()
+    {
+        if($this->email && $this->checkEmail($this->email)){
+            return false;
+        }else{
+            return parent::create();
+        }
+    }
+
+    public function update()
+    {
+        if($this->email && $this->checkEmail($this->email)){
+            return false;
+        }else{
+            return parent::update();
+        }
+    }
+
 }
 
