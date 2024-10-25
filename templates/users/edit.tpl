@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{extends file="layout.tpl"}
+{block name=title}
     <title>Edit User: {$user->firstname}</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
+    {/block}
+    {block name=head}
+    <link rel="stylesheet" href="css/edit.css">
+    {/block}
+{block name="content"}
     <div id="container">
         <h2>Użytkownik, którego właśnie edytujesz: <u>{$user->firstname} {$user->lastname}</u></h2>
         <form class="column" id="newData" method="post" action="index.php?method=update">
@@ -27,7 +26,5 @@
 
             <button type="submit" id="btn">Zatwierdz dane</button>
         </form>
-
     </div>
-</body>
-</html>
+{/block}

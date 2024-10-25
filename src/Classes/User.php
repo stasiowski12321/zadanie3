@@ -19,7 +19,7 @@ class User extends Model
         'email',
         'password'
     ];
-    public static function getEmail($email)
+    public function getEmail($email)
     {
         $db = Db::getInstance();
         $res = $db->getConnection()->prepare("SELECT COUNT(*) FROM " . static::$tableName . " WHERE email = :email");
@@ -28,15 +28,9 @@ class User extends Model
         
         return (bool) $res->fetchColumn();
     }
-
-    public function checkEmail($email)
-    {
-         return self::getEmail($email);
-    }
-    
     public function create()
     {
-        if($this->email && $this->checkEmail($this->email)){
+        if ($this->email && $this->getEmail($this->email)){
             return false;
         }else{
             return parent::create();
@@ -45,7 +39,7 @@ class User extends Model
 
     public function update()
     {
-        if($this->email && $this->checkEmail($this->email)){
+        if ($this->email && $this->getEmail($this->email)){
             return false;
         }else{
             return parent::update();
