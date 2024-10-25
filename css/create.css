@@ -21,23 +21,6 @@ h2 {
 }
 
 .form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.text-info {
-    font-weight: bold;
-    color: #007bff;
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.col {
-    flex: 1;
-    margin: 5px;
-    min-width: 200px;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
