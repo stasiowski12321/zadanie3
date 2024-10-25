@@ -5,22 +5,36 @@
 {block name=head}
 <link rel="stylesheet" href="css/create.css">
 {/block}
-{block name="content"}
-    <h1>Formularz do tworzenia użytkownika</h1>
-    <form method="post" action="index.php?method=createUser">
-        <label for="firstname">Podaj imie użytkownika</label>
-        <input type="text" name="firstname" id="firstname">
-
-        <label for="lastname">Podaj nazwisko użytkownika</label>
-        <input type="text" name="lastname" id="lastname">
-
-        <label for="email">Podaj e-mail użytkownika</label>
-        <input type="email" name="email" id="email">
-
-        <label for="password">Podaj hasło użytkownika</label>
-        <input type="password" name="password" id="password">
-
-        <button type="submit">Zatwierdz Dane</button>
-        <button type="reset">Wyczyść Dane Formularza</button>
-    </form>
-{/block}
+    {block name="content"}
+        <div id="login">
+            <div id="login-box">
+                <h2>Tworzenie nowego użytkownika</h2>
+                <form method="post" action="index.php?method=createUser">
+                    <div class="form-group">
+                        <label for="firstname" class="text-info">Imię</label>
+                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Podaj imię użytkownika">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="lastname" class="text-info">Nazwisko</label>
+                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Podaj nazwisko użytkownika">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="email" class="text-info">E-mail</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Podaj e-mail użytkownika">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="password" class="text-info">Hasło</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Podaj hasło użytkownika">
+                    </div>
+    
+                    <div class="form-group">
+                        <button type="submit" id="btn" class="btn btn-info">Zatwierdź dane</button>
+                        <button type="reset" class="btn btn-secondary">Wyczyść dane formularza</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {/block}
